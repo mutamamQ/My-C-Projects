@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
-char materials[]={"water"};
+char materials[100][100]={
+    {"water"},
+    {"methane"}};
 //materials name
 double fuse[]={333.55,58.99};
 double vapor[]={2257,480.6};
@@ -15,7 +17,7 @@ void materialno(){
     scanf("%s", inp);
     for (int i = 0; i < 30; i++){
 
-        if(strcmp(&materials[i],inp) == 0){
+        if(strcmp(&materials[i][0],inp) == 0){
             matNo = i;
             printf("What is the mass in grams\n");
             scanf("%d", &weight);
