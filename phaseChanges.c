@@ -8,10 +8,42 @@ double fuse[]={333.55,58.99};
 double vapor[]={2257,480.6};
 /*latent heat of fusion, latent heat of vaporization */
 char inp[100];
+double inpd; //input for only numbers
 int matNo; //the array number of the material and property
-int weight;
+double weight;
+int emptyArrayNo;
 double result;
- //function to identify the correct number for materials array
+//function to identify the correct number for materials array
+void addNewMat(){
+    printf("Do you want to use a new or existing material?\n");
+    scanf("%s",inp); //to create a new material
+    if(strcmp(inp,"new")==0){
+        for (int i = 0; i < 101; i++)
+        {
+            if (materials[i][0] != 0)
+            {
+                emptyArrayNo = i; //check which array space is the first empty one
+            }   
+        }
+        printf("What is the materials name");
+        scanf("%s",inp);
+        materials[emptyArrayNo][0]=*inp;
+        printf("What is the materials' latent heat of fusion");
+        scanf("%lf",&inpd);
+        fuse[emptyArrayNo]=inpd;
+        printf("What is the materials' latent heat of vaporization");
+        scanf("%lf",&inpd);
+        vapor[emptyArrayNo]=inpd;
+    }
+    else if (strcmp(inp,"existing") == 0)
+    {
+        return;
+    }
+}
+void grams(){
+    printf("What is the mass in grams\n");
+    scanf("%lf", &weight);
+}
 void materialno(){
     printf("what material are you converting\n");
     scanf("%s", inp);
@@ -19,8 +51,6 @@ void materialno(){
 
         if(strcmp(&materials[i][0],inp) == 0){
             matNo = i;
-            printf("What is the mass in grams\n");
-            scanf("%d", &weight);
             return;
         }
     }
@@ -42,6 +72,8 @@ void FOrV(){
     }
 }
 int main(){
+    addNewMat();
     materialno();
+    grams();
     FOrV();
 }
